@@ -1,5 +1,7 @@
 package HCMM17S1;
 
+import java.util.List;
+
 public class HCMM {
 	public static void main(String[] args) {
 		try {
@@ -8,7 +10,8 @@ public class HCMM {
 			String resultFile = args[2];
 			String reportFile = args[3];
 			MemberService memberService = new MemberService();
-			memberService.readMembers(membersFile);
+			List<Member> members = memberService.readMembers(membersFile);
+			
 			
 		} catch (Exception e) {
 			System.out.println("Input command is not correct");
