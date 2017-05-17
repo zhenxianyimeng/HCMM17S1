@@ -14,8 +14,9 @@ public class MemberService {
 
 	public List<Member> readMembers(String filePath){
 		members.clear();
+		BufferedReader reader = null;
 		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)));
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)));
 			String line = new String();
 			List<String> list = new ArrayList<>();
 			while ((line = reader.readLine()) != null){
@@ -35,13 +36,40 @@ public class MemberService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			if(reader != null)
+				try {
+					reader.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
-		return null;
+		return members;
 	}
 	
 	private void addMember(List<String> list){
-		for(String str : list)
-			System.out.println(str.trim());
-		System.out.println("++++++++++++++");
+		Member member = new Member();
+		for(String str : list){
+			if(str.startsWith("name"))
+				member.setName(str);
+			else if(str.startsWith("birthday"))
+				member.setBirthday(str);
+			else if(str.startsWith("mobile"))
+				member.setMobile(str);
+			else if(str.startsWith("pass"))
+				member.setPass(str);
+			else if(str.startsWith("fee"))
+				member.setFree(str);
+			else if(str.startsWith("address"))
+				member.setAddress(str);
+			else if(str.startsWith("email"))
+				member.setEmail(str);
+			else {
+				member.setAddress(member.getAddress()+str.trim());
+			}
+				
+		}
+		members.add(member);
 	}
 }
