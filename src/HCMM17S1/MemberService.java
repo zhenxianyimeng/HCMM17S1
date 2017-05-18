@@ -52,19 +52,19 @@ public class MemberService {
 		Member member = new Member();
 		for(String str : list){
 			if(str.startsWith("name"))
-				member.setName(str);
+				member.setName(str.replace("name ", ""));
 			else if(str.startsWith("birthday"))
-				member.setBirthday(str);
+				member.setBirthday(str.replace("birthday ", ""));
 			else if(str.startsWith("mobile"))
-				member.setMobile(str);
+				member.setMobile(str.replace("mobile ", ""));
 			else if(str.startsWith("pass"))
-				member.setPass(str);
+				member.setPass(str.replace("pass ", ""));
 			else if(str.startsWith("fee"))
-				member.setFree(str);
+				member.setFree(str.replace("fee ", ""));
 			else if(str.startsWith("address"))
-				member.setAddress(str);
+				member.setAddress(str.replace("address ", ""));
 			else if(str.startsWith("email"))
-				member.setEmail(str);
+				member.setEmail(str.replace("email ", ""));
 			else {
 				member.setAddress(member.getAddress()+str.trim());
 			}
