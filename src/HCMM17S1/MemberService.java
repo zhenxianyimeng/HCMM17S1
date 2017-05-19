@@ -72,4 +72,9 @@ public class MemberService {
 		}
 		members.add(member);
 	}
+	
+	public void printMembers(){
+		for(Member member : members)
+			System.out.println(member);
+	}
 }

@@ -11,7 +11,7 @@ public class HCMM {
 			String reportFile = args[3];
 			MemberService memberService = new MemberService();
 			List<Member> members = memberService.readMembers(membersFile);
-			
+			memberService.printMembers();
 			
 		} catch (Exception e) {
 			System.out.println("Input command is not correct");
