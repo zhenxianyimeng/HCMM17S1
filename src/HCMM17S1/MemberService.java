@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +16,11 @@ public class MemberService {
 	public List<Member> readMembers(String filePath){
 		members.clear();
 		BufferedReader reader = null;
+		List<String> list = null;
 		try {
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)));
 			String line = new String();
-			List<String> list = new ArrayList<>();
+			list = new ArrayList<>();
 			while ((line = reader.readLine()) != null){
 				if(!line.equals("")){
 					list.add(line);
@@ -45,6 +47,10 @@ public class MemberService {
 					e.printStackTrace();
 				}
 		}
+		if(!list.isEmpty()){
+			addMember(list);
+		}
+		list.clear();
 		return members;
 	}
 	
@@ -53,20 +59,27 @@ public class MemberService {
 		for(String str : list){
 			if(str.startsWith("name"))
 				member.setName(str.replace("name ", ""));
-			else if(str.startsWith("birthday"))
-				member.setBirthday(str.replace("birthday ", ""));
+			else if(str.startsWith("birthday")){
+				String[] birs = str.replace("birthday ", "").replace("-", "/").split("/");
+				String bir = new String();
+				if(birs[0].length() < 2)
+					bir =  bir + "0";
+				bir += birs[0]+"/";
+				if(birs[1].length() < 2)
+					bir = bir + "0";
+				bir += birs[1] + "/";
+				bir += birs[2];
+				member.setBirthday(bir);
+			}
 			else if(str.startsWith("mobile"))
 				member.setMobile(str.replace("mobile ", ""));
 			else if(str.startsWith("pass"))
 				member.setPass(str.replace("pass ", ""));
 			else if(str.startsWith("fee")){
 				String fee = str.replace("fee ", "");
-				String[] strs = fee.split("\\.");
-//				for(String s : strs)
-//					System.out.println(s);
-				if(strs.length == 1)
-					fee = fee +".00";
-				member.setFree(fee);
+				if(fee.startsWith("$"))
+					fee = fee.substring(1);
+				member.setFree("$"+new DecimalFormat("#0.00").format(Double.parseDouble(fee)));
 			}
 			else if(str.startsWith("address"))
 				member.setAddress(str.replace("address ", ""));
