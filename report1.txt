@@ -1,0 +1,88 @@
+----query pass Gold----
+name Julia Charsley
+birthday 01/02/2012
+mobile 00145800
+pass Gold
+fee $5.00
+
+name Julia Charsley
+birthday 05/02/1984
+mobile 00145890
+pass Gold
+fee $50.00
+
+name Julia Charsley
+birthday 01/02/2004
+mobile 98764030
+pass Gold
+fee $30.00
+
+name Tom White
+birthday 05/02/1970
+mobile 23004000
+pass Gold
+fee $10.00
+
+name Tom White
+mobile 23030000
+pass Gold
+fee $50.00
+
+Total Fee: $145.00
+-------------------------
+
+
+----query pass Gold----
+name Julia Charsley
+birthday 01/02/2012
+mobile 00145800
+pass Gold
+fee $5.00
+
+name Julia Charsley
+birthday 05/02/1984
+mobile 00145890
+pass Gold
+fee $50.00
+
+name Julia Charsley
+birthday 01/02/2004
+mobile 98764030
+pass Gold
+fee $30.00
+
+name Tom White
+birthday 14/12/1987
+mobile 23000000
+pass Gold
+fee $50.00
+
+name Tom White
+birthday 14/12/1957
+mobile 23000020
+pass Gold
+fee $10.00
+
+name Tom White
+birthday 05/02/1970
+mobile 23004000
+pass Gold
+fee $10.00
+
+name Tom White
+mobile 23030000
+pass Gold
+fee $50.00
+
+Total Fee: $205.00
+-------------------------
+
+----query age fee----
+Total Club Member size: 10
+Age based fee income distribution
+(0,8]: $5.00
+(8,18]: $50.00
+(18,65]: $120.00
+(65,-): $0.00
+Unknown: $70.00
+---------------------
