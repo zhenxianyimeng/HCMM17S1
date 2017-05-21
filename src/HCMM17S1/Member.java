@@ -71,6 +71,23 @@ public class Member {
 		this.email = email;
 	}
 
+//	@Override
+//	public boolean equals(Object obj) {
+//		Member member = (Member)obj;
+//		
+//		return this.getName().equals(member.getName()) && this.getMobile().equals(member.getMobile());
+//	}
+//	
+//	@Override
+//	public int hashCode() {
+//		// TODO Auto-generated method stub
+//		char[] chs = this.getName().toCharArray();
+//		int sum = 0;
+//		for(char ch : chs)
+//			sum += ch;
+//		return sum;
+//	}
+	
 	@Override
 	public String toString() {
 		return "Member [name=" + name + ", birthday=" + birthday + ", mobile=" + mobile + ", pass=" + pass + ", free="

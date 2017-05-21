@@ -59,8 +59,15 @@ public class MemberService {
 				member.setMobile(str.replace("mobile ", ""));
 			else if(str.startsWith("pass"))
 				member.setPass(str.replace("pass ", ""));
-			else if(str.startsWith("fee"))
-				member.setFree(str.replace("fee ", ""));
+			else if(str.startsWith("fee")){
+				String fee = str.replace("fee ", "");
+				String[] strs = fee.split("\\.");
+//				for(String s : strs)
+//					System.out.println(s);
+				if(strs.length == 1)
+					fee = fee +".00";
+				member.setFree(fee);
+			}
 			else if(str.startsWith("address"))
 				member.setAddress(str.replace("address ", ""));
 			else if(str.startsWith("email"))
