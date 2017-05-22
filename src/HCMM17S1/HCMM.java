@@ -4,7 +4,7 @@ import java.util.List;
 
 public class HCMM {
 	public static void main(String[] args) {
-		//try {
+		try {
 			String membersFile = args[0];
 			String instructionFile = args[1];
 			String resultFile = args[2];
@@ -12,7 +12,6 @@ public class HCMM {
 			MemberService memberService = new MemberService();
 			List<Member> members = memberService.readMembers(membersFile);
 			
-			//memberService.printMembers();
 			
 			Performace performace = new Performace();
 			performace.setList(members);
@@ -22,8 +21,8 @@ public class HCMM {
 			writeOut.writeout(members, resultFile);
 			
 			
-	//	} catch (Exception e) {
-	//		System.out.println("Input command is not correct");
-	//	}
+		} catch (Exception e) {
+			System.out.println("Input command is not correct");
+		}
 	}
 }

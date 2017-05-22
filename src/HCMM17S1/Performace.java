@@ -230,18 +230,7 @@ public class Performace {
 
 	private void sort(String str) {
 		if(str.equals("ascending")){
-			/*members.sort(new Comparator<Member>() {
-				@Override
-				public int compare(Member o1, Member o2) {
-					if(o1.getName().equals(o2.getName())){
-						return o1.getMobile().compareTo(o2.getMobile());
-						//return Integer.compare(Integer.parseInt(o1.getMobile()), Integer.parseInt(o2.getMobile()));
-					}else{
-						return o1.getName().compareTo(o2.getName());
-					}
-				}
-				
-			});*/
+
 			
 			members.sort(new Comparator<Member>() {
 				@Override
