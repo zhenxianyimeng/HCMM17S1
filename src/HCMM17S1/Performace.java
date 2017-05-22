@@ -65,8 +65,11 @@ public class Performace {
 		String[] strs = addStr.split("; ");
 		Member member = new Member();
 		for(String str : strs){
-			if(str.startsWith("name"))
+			if(str.startsWith("name")){
+				if(!ValidateUtil.ValidateName(str.replace("name ", "")))
+					return;
 				member.setName(str.replace("name ", ""));
+			}
 			else if(str.startsWith("birthday")){
 				String[] birs = str.replace("birthday ", "").replace("-", "/").split("/");
 				String bir = new String();
@@ -77,12 +80,18 @@ public class Performace {
 					bir = bir + "0";
 				bir += birs[1] + "/";
 				bir += birs[2];
-				member.setBirthday(bir);
+				if(ValidateUtil.ValidateDate(bir))
+					member.setBirthday(bir);
 			}
-			else if(str.startsWith("mobile"))
+			else if(str.startsWith("mobile")){
+				if(!ValidateUtil.ValidateMobile(str.replace("mobile ", "")))
+					return;
 				member.setMobile(str.replace("mobile ", ""));
-			else if(str.startsWith("pass"))
-				member.setPass(str.replace("pass ", ""));
+			}
+			else if(str.startsWith("pass")){
+				if(ValidateUtil.ValidatePass(str.replace("pass ", "")))
+					member.setPass(str.replace("pass ", ""));
+			}
 			else if(str.startsWith("fee")){
 				String fee = str.replace("fee ", "");
 				if(fee.startsWith("$"))
@@ -92,11 +101,18 @@ public class Performace {
 			}
 			else if(str.startsWith("address"))
 				member.setAddress(str.replace("address ", ""));
-			else if(str.startsWith("email"))
-				member.setEmail(str.replace("email ", ""));
+			else if(str.startsWith("email")){
+				if(ValidateUtil.ValidateEmail(str.replace("email ", "")))
+					member.setEmail(str.replace("email ", ""));
+			}
 			else {
 				member.setAddress(member.getAddress()+str.trim());
 			}
+		}
+		
+		if(member.getAddress() != null){
+			if(!ValidateUtil.ValidateAddress(member.getAddress()))
+				member.setAddress(null);
 		}
 		
 		int i=0;
@@ -192,7 +208,9 @@ public class Performace {
 			double four = 0;
 			double other = 0;
 			for(Member m : members){
-				double fee = Double.parseDouble(m.getFree().substring(1));
+				double fee = 0;
+				if(m.getFree() != null)
+					fee = Double.parseDouble(m.getFree().substring(1));
 				if(m.getBirthday() == null){
 					other += fee;
 				}else{

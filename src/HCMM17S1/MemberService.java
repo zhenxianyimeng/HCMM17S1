@@ -57,8 +57,11 @@ public class MemberService {
 	private void addMember(List<String> list){
 		Member member = new Member();
 		for(String str : list){
-			if(str.startsWith("name"))
+			if(str.startsWith("name")){
+				if(!ValidateUtil.ValidateName(str.replace("name ", "")))
+					return;
 				member.setName(str.replace("name ", ""));
+			}
 			else if(str.startsWith("birthday")){
 				String[] birs = str.replace("birthday ", "").replace("-", "/").split("/");
 				String bir = new String();
@@ -69,12 +72,22 @@ public class MemberService {
 					bir = bir + "0";
 				bir += birs[1] + "/";
 				bir += birs[2];
-				member.setBirthday(bir);
+				if(!ValidateUtil.ValidateDate(bir))
+					;
+				else
+					member.setBirthday(bir);
 			}
-			else if(str.startsWith("mobile"))
+			else if(str.startsWith("mobile")){
+				if(!ValidateUtil.ValidateMobile(str.replace("mobile ", "")))
+					return;
 				member.setMobile(str.replace("mobile ", ""));
-			else if(str.startsWith("pass"))
-				member.setPass(str.replace("pass ", ""));
+			}
+			else if(str.startsWith("pass")){
+				if(!ValidateUtil.ValidatePass(str.replace("pass ", "")))
+					;
+				else
+					member.setPass(str.replace("pass ", ""));
+			}
 			else if(str.startsWith("fee")){
 				String fee = str.replace("fee ", "");
 				if(fee.startsWith("$"))
@@ -83,12 +96,20 @@ public class MemberService {
 			}
 			else if(str.startsWith("address"))
 				member.setAddress(str.replace("address ", ""));
-			else if(str.startsWith("email"))
-				member.setEmail(str.replace("email ", ""));
+			else if(str.startsWith("email")){
+				if(!ValidateUtil.ValidateEmail(str.replace("email ", "")))
+					;
+				else
+					member.setEmail(str.replace("email ", ""));
+			}
 			else {
-				member.setAddress(member.getAddress()+str.trim());
+				member.setAddress(member.getAddress().trim()+" "+str.trim());
 			}
 				
+		}
+		if(member.getAddress() != null){
+			if(!ValidateUtil.ValidateAddress(member.getAddress()))
+				member.setAddress(null);
 		}
 		members.add(member);
 	}
